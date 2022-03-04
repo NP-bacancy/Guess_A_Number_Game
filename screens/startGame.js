@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import React, {useState} from 'react';
-import { Text, View, Button, StyleSheet, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { Text, View, Button, StyleSheet, TouchableWithoutFeedback, Keyboard, Alert, ScrollView, KeyboardAvoidingView} from 'react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Color from './../constants/colors';
@@ -49,22 +49,26 @@ const StartGame = props => {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={() =>{Keyboard.dismiss();}}>
-            <View style={styles.screen}>
-                <Text style={styles.title}>
-                    Welcome to the game!
-                </Text>
-                <Card>
-                    <Text style={styles.commonText}>Enter a Number</Text>
-                    <TextBox blurOnSubmit={true} autoCapitalize="none" autoCorrect={false} keyboardType="number-pad" maxLength={2} onChangeText={textValidator} value={enteredText}/>
-                    <View style={styles.buttonContainer}>
-                        <View style={styles.btnView}><Button style={styles.button} title="Reset" color={Color.secondary} onPress={resetButton}/></View>
-                        <View style={styles.btnView}><Button style={styles.button} title="Confirm" color={Color.primary} onPress={confirmButton}/></View>
+        <ScrollView>
+            <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={20}>
+                <TouchableWithoutFeedback onPress={() =>{Keyboard.dismiss();}}>
+                    <View style={styles.screen}>
+                        <Text style={styles.title}>
+                            Welcome to the game!
+                        </Text>
+                        <Card>
+                            <Text style={styles.commonText}>Enter a Number</Text>
+                            <TextBox blurOnSubmit={true} autoCapitalize="none" autoCorrect={false} keyboardType="number-pad" maxLength={2} onChangeText={textValidator} value={enteredText}/>
+                            <View style={styles.buttonContainer}>
+                                <View style={styles.btnView}><Button style={styles.button} title="Reset" color={Color.secondary} onPress={resetButton}/></View>
+                                <View style={styles.btnView}><Button style={styles.button} title="Confirm" color={Color.primary} onPress={confirmButton}/></View>
+                            </View>
+                        </Card>
+                        {userValue}
                     </View>
-                </Card>
-                {userValue}
-            </View>
-        </TouchableWithoutFeedback>
+                </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
+        </ScrollView>
     );
 };
 
@@ -88,6 +92,8 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         width: '60%',
+        minWidth: 300,
+        maxWidth: '85%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
@@ -95,6 +101,7 @@ const styles = StyleSheet.create({
     },
     btnView: {
         width: '40%',
+        marginHorizontal: 10,
     },
     button: {
         padding: 10,

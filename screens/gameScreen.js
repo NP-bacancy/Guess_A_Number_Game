@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import React, {useState, useRef} from 'react';
-import {Text, View, Button, StyleSheet, Alert, FlatList } from 'react-native';
+import {Text, View, Button, StyleSheet, Alert, FlatList, ScrollView } from 'react-native';
 // import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Color from './../constants/colors';
